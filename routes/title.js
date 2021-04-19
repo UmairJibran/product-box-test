@@ -1,17 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
+const log = console.log;
+
 const crawler = require("./../crawler");
 
 module.exports = () => {
 	router.get("/", (req, res) => {
 		const { address } = req.query;
-		if (address.length > 1)
-			address.forEach(address => {
-				crawler(address);
+		crawler(address)
+			.then(response => {
+				res.status(200).send(response);
+			})
+			.catch(error => {
+				res.status(404).send(error);
 			});
-		else crawler(address);
-		res.status(200).send(address);
 	});
 	return router;
 };
