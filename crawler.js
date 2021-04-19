@@ -1,8 +1,5 @@
 const https = require("https"); // imports the https library from nodejs core
 const _ = require("lodash"); // imports the lodash library from npmjs
-const title = require("./routes/title");
-
-const log = console.log;
 
 let titleGrabber = webUrl => {
 	// function recieves url and callback function when title is grabbed
