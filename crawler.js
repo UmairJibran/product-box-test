@@ -26,9 +26,12 @@ let titleGrabber = webUrl => {
 	});
 };
 
-module.exports = address => {
+module.exports = async address => {
 	// recieves only the address
-	return titleGrabber(address)
-		.then(title => title)
-		.catch(error => error);
+	try {
+		const title = await titleGrabber(address);
+		return title;
+	} catch (error) {
+		return error;
+	}
 };
