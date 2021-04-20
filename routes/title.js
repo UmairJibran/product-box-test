@@ -10,22 +10,18 @@ module.exports = () => {
 	router.get("/", (req, res) => {
 		const { address } = req.query;
 		if (typeof address === "string") {
-			Q.fcall(
-				crawler(address)
-					.then(response => {
-						let listItems = [];
-						listItems.push(`${address} - "${response}"`);
-						return listItems;
-					})
-					.then(items => {
-						return res.status(200).render("pages/", { items: items });
-					})
-					.catch(error => {
-						res.status(404).render("pages/not-found");
-					})
-			).catch(_ => {
-				res.status(404).render("pages/not-found");
-			});
+			crawler(address)
+				.then(response => {
+					let listItems = [];
+					listItems.push(`${address} - "${response}"`);
+					return listItems;
+				})
+				.then(items => {
+					return res.status(200).render("pages/", { items: items });
+				})
+				.catch(error => {
+					res.status(404).render("pages/not-found");
+				});
 		} else getItems(address, res);
 	});
 
@@ -42,7 +38,6 @@ module.exports = () => {
 					})
 			);
 		}
-
 		return res.status(200).render("pages/", { items: listItems });
 	}
 	return router;
