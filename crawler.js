@@ -5,11 +5,12 @@ const _ = require("lodash"); // imports the lodash library from npmjs
 
 let titleGrabber = webUrl => {
 	// function recieves url and callback function when title is grabbed
-	if (webUrl.substr(0, 4) != "http") webUrl = `https://${webUrl}`;
-	try {
-		const webPageUrl = new URL(webUrl);
-		console.log(webPageUrl);
-		return new Promise((resolve, reject) => {
+	return new Promise((resolve, reject) => {
+		if (webUrl.substr(0, 4) != "http" && webUrl.includes("."))
+			webUrl = `https://${webUrl}`;
+		try {
+			const webPageUrl = new URL(webUrl);
+			console.log(webPageUrl);
 			if (webPageUrl.protocol === "https:") {
 				https
 					.get(webPageUrl, res => {
@@ -42,13 +43,13 @@ let titleGrabber = webUrl => {
 							.on("end", () => resolve(title)); // when entire webpage is scrapped return the title to the callback function
 					})
 					.on("error", error => {
-						reject(error);
+						reject("invalid url");
 					}); // returns title as default value of "does not exist" to the callback function when webpage is not found
 			}
-		});
-	} catch (err) {
-		console.error(err);
-	}
+		} catch (err) {
+			reject("invalid url");
+		}
+	});
 };
 
 module.exports = async address => {
