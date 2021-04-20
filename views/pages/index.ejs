@@ -5,13 +5,24 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Title Scrapper!</title>
+		<link
+			href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<h1>Following are the titles of given websites:</h1>
-		<ul>
-			<% items.forEach(item=>{%>
-			<li><%= item %></li>
-			<%})%>
-		</ul>
+		<div class="h-full w-full">
+			<center>
+				<h1 class="text-3xl mt-32">
+					Following are the titles of given websites:
+				</h1>
+				<ul>
+					<li class="font-bold">URL - "title"</li>
+					<% items.forEach(item=>{%>
+					<li><%= item %></li>
+					<%})%>
+				</ul>
+			</center>
+		</div>
 	</body>
 </html>
