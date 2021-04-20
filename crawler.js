@@ -5,7 +5,7 @@ const _ = require("lodash"); // imports the lodash library from npmjs
 
 let titleGrabber = webUrl => {
 	// function recieves url and callback function when title is grabbed
-	if (webUrl.substr(0, 4) != "http") webUrl = `http://${webUrl}`;
+	if (webUrl.substr(0, 4) != "http") webUrl = `https://${webUrl}`;
 	try {
 		const webPageUrl = new URL(webUrl);
 		console.log(webPageUrl);
