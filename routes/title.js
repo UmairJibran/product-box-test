@@ -1,5 +1,4 @@
 const express = require("express");
-const Q = require("q");
 const router = express.Router();
 
 const log = console.log;
