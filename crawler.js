@@ -26,7 +26,7 @@ let titleGrabber = webUrl => {
 							.on("end", () => resolve(title)); // when entire webpage is scrapped return the title to the callback function
 					})
 					.on("error", error => {
-						reject(error);
+						reject("does not exist");
 					}); // returns title as default value of "does not exist" to the callback function when webpage is not found
 			} else {
 				http
