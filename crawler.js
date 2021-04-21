@@ -2,10 +2,11 @@ const https = require("https"); // imports the https library from nodejs core
 const http = require("http"); // imports the http library from nodejs core
 const url = require("url"); // imports the url library from nodejs core
 const _ = require("lodash"); // imports the lodash library from npmjs
+const Bluebird = require("bluebird"); // imports the bluebird library from npmjs
 
 let titleGrabber = webUrl => {
 	// function recieves url and callback function when title is grabbed
-	return new Promise((resolve, reject) => {
+	return new Bluebird((resolve, reject) => {
 		if (webUrl.substr(0, 4) != "http" && webUrl.includes("."))
 			webUrl = `https://${webUrl}`;
 		try {
