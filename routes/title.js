@@ -8,7 +8,9 @@ const crawler = require("./../crawler");
 module.exports = () => {
 	router.get("/", (req, res) => {
 		const { address } = req.query;
-		if (typeof address === "string") {
+		if (address == undefined) {
+			res.status(404).render("pages/not-found");
+		} else if (typeof address === "string") {
 			crawler(address)
 				.then(response => {
 					let listItems = [];
@@ -33,10 +35,11 @@ module.exports = () => {
 						return `${address[i]} - "${response}"`;
 					})
 					.catch(error => {
-						res.status(404).send(error);
+						res.status(404).render("pages/not-found");
 					})
 			);
 		}
+
 		return res.status(200).render("pages/", { items: listItems });
 	}
 	return router;
